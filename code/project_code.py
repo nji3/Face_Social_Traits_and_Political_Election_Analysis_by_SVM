@@ -14,7 +14,7 @@ from skimage import feature
 ### Part 1
 ## Task 1.1 Classification by Landmarks
 # Read Landmarks of all 491 images and Trait Annotations
-all = '/Users/paul/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/train-anno.mat'
+all = '*/data/train-anno.mat'
 all_dic = scipy.io.loadmat(all)
 all_landmarks = all_dic['face_landmark'] # 491x160
 all_traits_value = all_dic['trait_annotation'] # 491x14
@@ -72,8 +72,8 @@ for t in range(14):
     print('%d is done' %t)
 
 svm_res = [svc_params,svc_train_accuracy,svc_test_accuracy]
-np.save('1.1SVM_Res.npy',svm_res)
-svm_res = np.load('1.1SVM_Res.npy')
+np.save('*/data/1.1SVM_Res.npy',svm_res)
+svm_res = np.load('*/data/1.1SVM_Res.npy')
 svc_train_accuracy = svm_res[0]
 svc_test_accuracy = svm_res[1]
 svc_params = svm_res[2]
@@ -92,14 +92,14 @@ for t in range(14):
     print('%d is done' %t)
 
 svr_res = [svr_params,svr_train_mse,svr_test_mse]
-np.save('1.1SVR_Res.npy',svr_res)
-svr_res = np.load('1.1SVR_Res.npy')
+np.save('*/data/1.1SVR_Res.npy',svr_res)
+svr_res = np.load('*/data/1.1SVR_Res.npy')
 svr_train_mse = svr_res[0]
 svr_test_mse = svr_res[1]
 svr_params = svr_res[2]
 
 ## Task 1.2 Classification by Landmarks
-img_path = '/Users/paul/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img/M0001.jpg'
+img_path = '*/data/img/M0001.jpg'
 im = cv2.imread(img_path)
 
 # Try an example to plot the hog feature
@@ -111,7 +111,7 @@ cv2.imshow("HOG Image", hogImage)
 
 # Read images
 images = [cv2.imread(file) for file in\
-glob.glob('/Users/paul/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img/*.jpg')]
+glob.glob('*/data/img/*.jpg')]
 
 # Calculate the Hog features for all 491 images and Combine the hogs features with landmarks
 Hogs,hogImage= feature.hog(images[0], orientations=8, pixels_per_cell=(32, 32),cells_per_block=(2, 2),\
@@ -153,8 +153,8 @@ for t in range(14):
     svc_params.append(param)
 
 svm_res = [svc_params,svc_train_accuracy,svc_test_accuracy]
-np.save('1.2SVM_Res.npy',svm_res)
-svm_res = np.load('1.2SVM_Res.npy')
+np.save('*/data/1.2SVM_Res.npy',svm_res)
+svm_res = np.load('*/data/1.2SVM_Res.npy')
 svc_train_accuracy = svm_res[0]
 svc_test_accuracy = svm_res[1]
 svc_params = svm_res[2]
@@ -188,8 +188,8 @@ for t in range(14):
     print('%d is done' %t)
 
 svr_res = [svr_params,svr_train_mse,svr_test_mse]
-np.save('1.2SVR_Res.npy',svr_res)
-svr_res = np.load('1.2SVR_Res.npy')
+np.save('*/data/1.2SVR_Res.npy',svr_res)
+svr_res = np.load('*/data/1.2SVR_Res.npy')
 svr_params = svr_res[0]
 svr_train_mse = svr_res[1]
 svr_test_mse = svr_res[2]
@@ -217,8 +217,8 @@ def extract_hog_features(path):
     return(Hogs)
 
 # Read the landmarks for governors and senators seperately
-gov = '/Users/paul/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/stat-gov.mat'
-sen = '/Users/paul/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/stat-sen.mat'
+gov = '*/data/stat-gov.mat'
+sen = '*/data/stat-sen.mat'
 gov_landmarks = scipy.io.loadmat(gov)['face_landmark']
 gov_vote_diff = scipy.io.loadmat(gov)['vote_diff']
 sen_landmarks = scipy.io.loadmat(sen)['face_landmark']
@@ -227,8 +227,8 @@ gov_landmarks = min_max(gov_landmarks)
 sen_landmarks = min_max(sen_landmarks)
 
 # Extract hog features of governors and senators seperately
-gov_im = '/Users/paul/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img-elec/governor/*.jpg'
-sen_im = '/Users/paul/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img-elec/senator/*.jpg'
+gov_im = '*/data/*.jpg'
+sen_im = '*/data/*.jpg'
 gov_hog = extract_hog_features(gov_im)
 sen_hog = extract_hog_features(sen_im)
 gov_hog = min_max(gov_hog)
@@ -275,7 +275,7 @@ scores.mean() # 0.6272727272727272
 # Two layers of SVM
 # First layer contains 14 models for 14 traits
 # Read the selected 14 models
-svr_res = np.load('1.2SVR_Res.npy')
+svr_res = np.load('*/data/1.2SVR_Res.npy')
 svr_params = svr_res[0]
 
 gov_dat
