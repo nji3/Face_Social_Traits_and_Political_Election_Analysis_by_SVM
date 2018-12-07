@@ -35,8 +35,8 @@ def extract_hog_features(path):
     return(Hogs)
 
 # Read the landmarks for governors and senators seperately
-gov = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/stat-gov.mat'
-sen = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/stat-sen.mat'
+gov = '*/data/stat-gov.mat'
+sen = '*/data/stat-sen.mat'
 gov_landmarks = scipy.io.loadmat(gov)['face_landmark']
 gov_vote_diff = scipy.io.loadmat(gov)['vote_diff']
 sen_landmarks = scipy.io.loadmat(sen)['face_landmark']
@@ -45,8 +45,8 @@ gov_landmarks = min_max(gov_landmarks)
 sen_landmarks = min_max(sen_landmarks)
 
 # Extract hog features of governors and senators seperately
-gov_im = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img-elec/governor/*.jpg'
-sen_im = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img-elec/senator/*.jpg'
+gov_im = '*/data/img-elec/governor/*.jpg'
+sen_im = '*/data/img-elec/senator/*.jpg'
 gov_hog = extract_hog_features(gov_im)
 sen_hog = extract_hog_features(sen_im)
 gov_hog = min_max(gov_hog)

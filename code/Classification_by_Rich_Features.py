@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 ### Part 1
 ## Task 1.1 Classification by Landmarks
 # Read Landmarks of all 491 images and Trait Annotations
-all = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/train-anno.mat'
+all = '*/data/train-anno.mat'
 all_dic = scipy.io.loadmat(all)
 all_landmarks = all_dic['face_landmark'] # 491x160
 all_traits_value = all_dic['trait_annotation'] # 491x14
@@ -61,7 +61,7 @@ def svr_kfold_crossv(X_train,X_test,y_train,y_test,k=5,c_max=5,gamma_max=0.1,eps
 ## Task 1.2 Classification by Landmarks
 # Read images
 images = [cv2.imread(file) for file in\
-glob.glob('/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img/*.jpg')]
+glob.glob('*/data/img/*.jpg')]
 
 # Calculate the Hog features for all 491 images and Combine the hogs features with landmarks
 Hogs,hogImage= feature.hog(images[0], orientations=8, pixels_per_cell=(32, 32),cells_per_block=(2, 2),\

@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 ### Part 1
 ## Task 1.1 Classification by Landmarks
 # Read Landmarks of all 491 images and Trait Annotations
-all = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/train-anno.mat'
+all = '*/data/train-anno.mat'
 all_dic = scipy.io.loadmat(all)
 all_landmarks = all_dic['face_landmark'] # 491x160
 all_traits_value = all_dic['trait_annotation'] # 491x14

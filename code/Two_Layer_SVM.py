@@ -13,7 +13,7 @@ from skimage import feature
 import matplotlib.pyplot as plt
 
 # Read Landmarks of all 491 images and Trait Annotations
-all = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/train-anno.mat'
+all = '*/data/train-anno.mat'
 all_dic = scipy.io.loadmat(all)
 all_landmarks = all_dic['face_landmark'] # 491x160
 all_traits_value = all_dic['trait_annotation'] # 491x14
@@ -29,7 +29,7 @@ for i in range(491):
     all_traits_value[i,:] = all_traits_value[i,:] - row_mean
 
 images = [cv2.imread(file) for file in\
-glob.glob('/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img/*.jpg')]
+glob.glob('*/data/img/*.jpg')]
 
 # Calculate the Hog features for all 491 images and Combine the hogs features with landmarks
 Hogs,hogImage= feature.hog(images[0], orientations=8, pixels_per_cell=(32, 32),cells_per_block=(2, 2),\
@@ -74,8 +74,8 @@ def dat_rankSVM(X,y):
     return X_new,y_new
 
 # Read the landmarks for governors and senators seperately
-gov = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/stat-gov.mat'
-sen = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/stat-sen.mat'
+gov = '*/data/stat-gov.mat'
+sen = '*/data/stat-sen.mat'
 gov_landmarks = scipy.io.loadmat(gov)['face_landmark']
 gov_vote_diff = scipy.io.loadmat(gov)['vote_diff']
 sen_landmarks = scipy.io.loadmat(sen)['face_landmark']
@@ -84,8 +84,8 @@ gov_landmarks = min_max(gov_landmarks)
 sen_landmarks = min_max(sen_landmarks)
 
 # Extract hog features of governors and senators seperately
-gov_im = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img-elec/governor/*.jpg'
-sen_im = '/Users/nanji/Desktop/UCLA/2018Fall/stat231/project3_code_and_data/img-elec/senator/*.jpg'
+gov_im = '*/data/img-elec/governor/*.jpg'
+sen_im = '*/data/img-elec/senator/*.jpg'
 gov_hog = extract_hog_features(gov_im)
 sen_hog = extract_hog_features(sen_im)
 gov_hog = min_max(gov_hog)
